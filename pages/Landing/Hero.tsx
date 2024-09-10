@@ -45,15 +45,16 @@ function Hero() {
       {/* Scroll yazısı */}
       <motion.div
         className='absolute bottom-8 right-8 text-white text-lg font-semibold'
-        initial={{ scale: 0, rotate: 0 }}
-        animate={{ scale: [0, 1.2, 1], rotate: [0, 20, -20, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.5 }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut', repeat: Infinity, repeatType: 'reverse' }}
       >
         <p className='flex items-center text-2xl space-x-2'>
           <span>Scroll</span>
           <motion.span
-            animate={{ rotate: [0, 20, -20, 0] }}
-            transition={{ repeat: Infinity, duration: 1 }}
+            className='text-2xl'
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
           >
             ⬇️
           </motion.span>

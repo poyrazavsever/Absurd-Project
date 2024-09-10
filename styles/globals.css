@@ -30,7 +30,7 @@ html, body {
 
 .custom-cursor::before {
   content: '';
-  @apply absolute w-24 h-24 rounded-full bg-violet-500;
+  @apply absolute w-24 h-24 rounded-full bg-neutral-500;
   filter: blur(8px);
   opacity: 0.5;
   z-index: -1;
@@ -44,18 +44,18 @@ html, body {
 
 /* Başlık ve paragraf seçim renkleri */
 ::selection {
-  background-color: #fbcfe8; /* Açık pembe arka plan rengi */
-  color: #6b21a8; /* Mor yazı rengi */
+  background-color: #1f1f1f; /* Açık pembe arka plan rengi */
+  color: #969696; /* Mor yazı rengi */
 }
 
 /* Başlık ve paragraf seçildiğinde özel renk */
 h5::selection {
-  background-color: #fbcfe8; /* Açık pembe arka plan rengi */
-  color: #6b21a8; /* Mor yazı rengi */
+  background-color: #0e0e0e; /* Açık pembe arka plan rengi */
+  color: #8f8f8f; /* Mor yazı rengi */
 }
 
 p::selection {
-  background-color: #e9d5ff; /* Mor arka plan rengi */
-  color: #4a00e0; /* Mor yazı rengi */
+  background-color: #000000; /* Mor arka plan rengi */
+  color: #5a5a5a; /* Mor yazı rengi */
 }
 
