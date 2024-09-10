@@ -18,7 +18,12 @@ function Hero() {
       {/* Modal */}
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
 
-      <div className='flex flex-col items-start gap-12 px-8 md:px-48 z-20'>
+      <motion.div
+        className='flex flex-col items-start gap-12 px-8 md:px-48 z-20'
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+      >
         <h5 className='text-5xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-sky-500'>
           Did you see this too?
         </h5>
@@ -35,14 +40,14 @@ function Hero() {
         >
           Explore More
         </motion.button>
-      </div>
+      </motion.div>
 
       {/* Scroll yazısı */}
       <motion.div
         className='absolute bottom-8 right-8 text-white text-lg font-semibold'
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
+        initial={{ scale: 0, rotate: 0 }}
+        animate={{ scale: [0, 1.2, 1], rotate: [0, 20, -20, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.5 }}
       >
         <p className='flex items-center text-2xl space-x-2'>
           <span>Scroll</span>

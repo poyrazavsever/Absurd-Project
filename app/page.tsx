@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import Hero from '@/pages/Landing/Hero';
 import { debounce } from "../utils/debounce"
+import About from '@/pages/Landing/About';
 
 const Page = () => {
   useEffect(() => {
@@ -59,8 +60,8 @@ const Page = () => {
       <div className="section h-screen w-screen active">
         <Hero />
       </div>
-      <div className="section h-screen w-screen bg-blue-500 flex items-center justify-center text-white text-3xl">
-        Section 2
+      <div className="section h-screen w-screen">
+        <About />
       </div>
       <div className="section h-screen w-screen bg-green-500 flex items-center justify-center text-white text-3xl">
         Section 3
