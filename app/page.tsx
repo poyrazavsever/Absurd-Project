@@ -1,5 +1,5 @@
-// app/page.tsx
 "use client";
+
 import React, { useEffect } from 'react';
 import Hero from '@/pages/Hero';
 import { debounce } from "../utils/debounce";
@@ -53,7 +53,9 @@ const Page = () => {
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
-      document.body.removeChild(cursor);
+      if (document.body.contains(cursor)) {
+        document.body.removeChild(cursor);
+      }
     };
   }, []);
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ModalRiddle from '@/components/ModalRiddle';
 
@@ -112,11 +112,12 @@ const RiddleSection = () => {
     const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [modalMessage, setModalMessage] = useState<string>('');
     const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false);
-  
+    const [isVisible, setIsVisible] = useState<boolean>(false);
+
     const handleAnswerChange = (index: number) => {
       setSelectedAnswer(index);
     };
-  
+
     const handleCheckAnswer = () => {
       if (selectedAnswer !== null) {
         const correctAnswer = riddles[currentRiddle].answers.find(answer => answer.correct);
@@ -132,7 +133,7 @@ const RiddleSection = () => {
         }
         
         setModalOpen(true);
-        
+
         // Automatically go to the next riddle after the modal closes
         setTimeout(() => {
           setModalOpen(false);
@@ -142,56 +143,58 @@ const RiddleSection = () => {
         }, 3000); // 3 seconds for the modal to display
       }
     };
-  
+
     const handleNextRiddle = () => {
       setFeedback(null);
       setSelectedAnswer(null);
       setCurrentRiddle((prev) => (prev + 1) % riddles.length);
     };
-  
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          } else {
+            setIsVisible(false);
+          }
+        },
+        { threshold: 0.1 } // Valid threshold value between 0 and 1
+      );
+
+      const sectionElement = document.querySelector('#riddle-section');
+      if (sectionElement) {
+        observer.observe(sectionElement);
+      }
+
+      return () => {
+        if (sectionElement) {
+          observer.unobserve(sectionElement);
+        }
+      };
+    }, []);
+
     return (
-      <motion.div
-        className="h-full w-full bg-neutral-950 flex flex-col items-center justify-center text-3xl relative"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
-      >
+      <div id="riddle-section" className="h-full w-full bg-neutral-950 flex flex-col items-center justify-center text-3xl relative">
         <ModalRiddle 
           isOpen={modalOpen} 
           onClose={() => setModalOpen(false)} 
           message={modalMessage} 
           isCorrect={isAnswerCorrect} 
         />
-        <motion.h2
-          className="text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-sky-100 mb-8"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-        >
-          Riddle Me This!
-        </motion.h2>
+        <h2 className="text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-sky-100 mb-8">Riddle Me This!</h2>
         <motion.div
           className="p-8 bg-neutral-900 border border-neutral-800 rounded-lg shadow-lg text-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
+          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8, y: isVisible ? 0 : 20 }}
+          transition={{ duration: 0.6, ease: 'easeInOut' }}
         >
-          <motion.p
-            className="text-2xl font-medium text-neutral-300 pb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            {riddles[currentRiddle].question}
-          </motion.p>
+          <p className="text-2xl font-medium text-neutral-300 pb-8">{riddles[currentRiddle].question}</p>
           <div className="flex flex-col space-y-4">
             {riddles[currentRiddle].answers.map((answer, index) => (
-              <motion.label 
+              <label 
                 key={index} 
                 className={`block p-4 rounded-lg cursor-pointer text-neutral-300 transition-colors ${selectedAnswer === index ? (feedback === 'correct' ? 'bg-green-500' : 'bg-red-500') : 'bg-neutral-800 hover:bg-neutral-700'} ${feedback ? 'pointer-events-none' : ''}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.1 }}
               >
                 <input
                   type="radio"
@@ -202,7 +205,7 @@ const RiddleSection = () => {
                   onChange={() => handleAnswerChange(index)}
                 />
                 {answer.text}
-              </motion.label>
+              </label>
             ))}
           </div>
           <div className='flex items-center justify-start gap-8 pt-6'>
@@ -228,14 +231,13 @@ const RiddleSection = () => {
         <motion.div
           className="absolute top-4 right-4 text-lg font-bold text-gray-200 bg-neutral-800 bg-opacity-50 border border-neutral-700 p-4 rounded-lg shadow-lg"
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : -20 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
         >
           <p>Score: {score}</p>
         </motion.div>
-      </motion.div>
+      </div>
     );
-  };
-  
-  export default RiddleSection;
+};
 
+export default RiddleSection;
