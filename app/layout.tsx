@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
-  title: "Poyraz Avsever - Personel Website - Portfolio - Blog",
+  title: "Did you see it too?",
   description: "Created by Poyraz Avsever",
 };
 
@@ -13,7 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }
