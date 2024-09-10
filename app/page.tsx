@@ -1,9 +1,10 @@
 // app/page.tsx
 "use client";
 import React, { useEffect } from 'react';
-import Hero from '@/pages/Landing/Hero';
-import { debounce } from "../utils/debounce"
-import About from '@/pages/Landing/About';
+import Hero from '@/pages/Hero';
+import { debounce } from "../utils/debounce";
+import About from '@/pages/About';
+import RiddleSection from '@/pages/RiddleSection';
 
 const Page = () => {
   useEffect(() => {
@@ -55,6 +56,7 @@ const Page = () => {
       document.body.removeChild(cursor);
     };
   }, []);
+
   return (
     <div className="relative overflow-hidden h-screen w-screen">
       <div className="section h-screen w-screen active">
@@ -63,8 +65,8 @@ const Page = () => {
       <div className="section h-screen w-screen">
         <About />
       </div>
-      <div className="section h-screen w-screen bg-green-500 flex items-center justify-center text-white text-3xl">
-        Section 3
+      <div className="section h-screen w-screen">
+        <RiddleSection />
       </div>
     </div>
   );
