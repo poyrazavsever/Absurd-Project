@@ -36,6 +36,24 @@ function Hero() {
           Explore More
         </motion.button>
       </div>
+
+      {/* Scroll yazısı */}
+      <motion.div
+        className='absolute bottom-8 right-8 text-white text-lg font-semibold'
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+      >
+        <p className='flex items-center text-2xl space-x-2'>
+          <span>Scroll</span>
+          <motion.span
+            animate={{ rotate: [0, 20, -20, 0] }}
+            transition={{ repeat: Infinity, duration: 1 }}
+          >
+            ⬇️
+          </motion.span>
+        </p>
+      </motion.div>
     </div>
   );
 }
