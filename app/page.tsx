@@ -1,11 +1,12 @@
 // app/page.tsx
 "use client";
-
 import React, { useEffect } from 'react';
+import Hero from '@/pages/Landing/Hero';
+import { debounce } from "../utils/debounce"
 
 const Page = () => {
   useEffect(() => {
-    const handleScroll = (event: WheelEvent) => {
+    const handleScroll = debounce((event: WheelEvent) => {
       event.preventDefault();
       const scrollDirection = event.deltaY > 0 ? 'down' : 'up';
       const sections = document.querySelectorAll('.section');
@@ -27,7 +28,7 @@ const Page = () => {
           prevSection.scrollIntoView({ behavior: 'smooth' });
         }
       }
-    };
+    }, 200); // 200ms debounce delay
 
     window.addEventListener('wheel', handleScroll);
 
@@ -38,8 +39,8 @@ const Page = () => {
 
   return (
     <div className="relative overflow-hidden h-screen w-screen">
-      <div className="section h-screen w-screen bg-red-500 flex items-center justify-center text-white text-3xl active">
-        Section 1
+      <div className="section h-screen w-screen active">
+        <Hero />
       </div>
       <div className="section h-screen w-screen bg-blue-500 flex items-center justify-center text-white text-3xl">
         Section 2
