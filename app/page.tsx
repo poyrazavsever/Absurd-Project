@@ -54,7 +54,6 @@ const Page = () => {
       document.body.removeChild(cursor);
     };
   }, []);
-
   return (
     <div className="relative overflow-hidden h-screen w-screen">
       <div className="section h-screen w-screen active">

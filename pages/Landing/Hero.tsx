@@ -1,7 +1,9 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 
 function Hero() {
+
   return (
     <div className='w-full h-full bg-neutral-950 flex items-center justify-center'>
         <div className='flex flex-col items-start gap-12 px-8 md:px-24'>
@@ -16,7 +18,7 @@ function Hero() {
               whileHover={{ scale: 1.1, backgroundColor: '#A78BFA' }} // Hover animasyonu
               whileTap={{ scale: 0.9 }} // Tıklama animasyonu
               transition={{ type: 'spring', stiffness: 300 }} // Geçiş ayarları
-              className='px-6 py-3 text-lg font-bold text-white rounded-full bg-violet-600 border-2 border-transparent hover:border-violet-400 transition-colors'
+              className='px-6 py-3 text-lg font-bold text-white rounded-full bg-violet-600 border-2 border-transparent hover:border-violet-400 transition-colors cursor-none'
             >
               Explore More
             </motion.button>
