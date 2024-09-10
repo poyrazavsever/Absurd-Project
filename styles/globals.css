@@ -16,3 +16,18 @@ html, body {
 .active {
   transform: translateY(0);
 }
+
+
+.custom-cursor {
+  @apply absolute w-24 h-24 rounded-full border-2 border-opacity-50 border-white pointer-events-none transform -translate-x-1/2 -translate-y-1/2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.custom-cursor::after {
+  content: '';
+  @apply w-2.5 h-2.5 rounded-full bg-white;
+}
