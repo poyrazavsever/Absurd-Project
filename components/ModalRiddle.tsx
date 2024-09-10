@@ -15,7 +15,7 @@ const ModalRiddle: React.FC<ModalRiddleProps> = ({ isOpen, onClose, message, isC
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <motion.div
-        className={`p-6 bg-${isCorrect ? 'green' : 'red'}-500 rounded-lg text-white`}
+        className={`p-6 bg-${isCorrect ? 'green' : 'red'}-500 bg-opacity-80 border border-${isCorrect ? 'green' : 'red'}-800 rounded-lg text-white`}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
