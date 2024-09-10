@@ -4,35 +4,107 @@ import { motion } from 'framer-motion';
 import ModalRiddle from '@/components/ModalRiddle';
 
 const riddles = [
-  { 
-    question: "Why did the scarecrow become a successful neurosurgeon?", 
-    answers: [
-      { text: "Because he was outstanding in his field!", correct: true },
-      { text: "Because he was the best in the business.", correct: false },
-      { text: "Because he had a lot of connections.", correct: false },
-      { text: "Because he was a real brainiac.", correct: false }
-    ]
-  },
-  { 
-    question: "What do you call fake spaghetti?", 
-    answers: [
-      { text: "An impasta!", correct: true },
-      { text: "A noodle in disguise.", correct: false },
-      { text: "A faux pasta.", correct: false },
-      { text: "A pasta pretender.", correct: false }
-    ]
-  },
-  { 
-    question: "Why don’t skeletons fight each other?", 
-    answers: [
-      { text: "They don’t have the guts!", correct: true },
-      { text: "They’re too bony.", correct: false },
-      { text: "They’re not in the mood.", correct: false },
-      { text: "They don’t have the energy.", correct: false }
-    ]
-  },
-  // Add more riddles as needed
-];
+    { 
+      question: "Why did the scarecrow become a successful neurosurgeon?", 
+      answers: [
+        { text: "Because he was outstanding in his field!", correct: true },
+        { text: "Because he was the best in the business.", correct: false },
+        { text: "Because he had a lot of connections.", correct: false },
+        { text: "Because he was a real brainiac.", correct: false }
+      ]
+    },
+    { 
+      question: "What do you call fake spaghetti?", 
+      answers: [
+        { text: "An impasta!", correct: true },
+        { text: "A noodle in disguise.", correct: false },
+        { text: "A faux pasta.", correct: false },
+        { text: "A pasta pretender.", correct: false }
+      ]
+    },
+    { 
+      question: "Why don’t skeletons fight each other?", 
+      answers: [
+        { text: "They don’t have the guts!", correct: true },
+        { text: "They’re too bony.", correct: false },
+        { text: "They’re not in the mood.", correct: false },
+        { text: "They don’t have the energy.", correct: false }
+      ]
+    },
+    { 
+      question: "What do you get when you cross a snowman and a vampire?", 
+      answers: [
+        { text: "Frostbite!", correct: true },
+        { text: "A chilly vampire.", correct: false },
+        { text: "A snow monster.", correct: false },
+        { text: "A frost vampire.", correct: false }
+      ]
+    },
+    { 
+      question: "Why did the bicycle fall over?", 
+      answers: [
+        { text: "Because it was two-tired!", correct: true },
+        { text: "Because it lost its balance.", correct: false },
+        { text: "Because it was too old.", correct: false },
+        { text: "Because the tires were flat.", correct: false }
+      ]
+    },
+    { 
+      question: "Why did the math book look sad?", 
+      answers: [
+        { text: "Because it had too many problems.", correct: true },
+        { text: "Because it was out of date.", correct: false },
+        { text: "Because it was too difficult.", correct: false },
+        { text: "Because it was missing pages.", correct: false }
+      ]
+    },
+    { 
+      question: "What did one wall say to the other wall?", 
+      answers: [
+        { text: "I'll meet you at the corner.", correct: true },
+        { text: "We need to talk.", correct: false },
+        { text: "Let's go for a walk.", correct: false },
+        { text: "I need to get a new coat.", correct: false }
+      ]
+    },
+    { 
+      question: "Why was the computer cold?", 
+      answers: [
+        { text: "Because it left its Windows open.", correct: true },
+        { text: "Because it was old.", correct: false },
+        { text: "Because it was malfunctioning.", correct: false },
+        { text: "Because it was out of date.", correct: false }
+      ]
+    },
+    { 
+      question: "Why don’t scientists trust atoms?", 
+      answers: [
+        { text: "Because they make up everything.", correct: true },
+        { text: "Because they are unpredictable.", correct: false },
+        { text: "Because they are too small.", correct: false },
+        { text: "Because they are unstable.", correct: false }
+      ]
+    },
+    { 
+      question: "What do you call cheese that isn't yours?", 
+      answers: [
+        { text: "Nacho cheese!", correct: true },
+        { text: "Stolen cheese.", correct: false },
+        { text: "Shared cheese.", correct: false },
+        { text: "Borrowed cheese.", correct: false }
+      ]
+    },
+    { 
+      question: "How do you organize a space party?", 
+      answers: [
+        { text: "You planet!", correct: true },
+        { text: "You book a venue.", correct: false },
+        { text: "You invite aliens.", correct: false },
+        { text: "You set up the stars.", correct: false }
+      ]
+    }
+  ];
+  
 
 const RiddleSection = () => {
   const [currentRiddle, setCurrentRiddle] = useState<number>(0);
