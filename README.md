@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Absurd Project
 
-## Getting Started
+## Overview
 
-First, run the development server:
+Welcome to the **Absurd Project**, an intentionally whimsical and humorous web application designed to make you smile. This project embodies the spirit of absurdity and embraces the art of not taking things too seriously. If you're looking for a conventional or serious project, this is not the place for you!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Purpose
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The Absurd Project serves no practical purpose other than to provide a bit of levity and absurdity. It’s crafted to make you chuckle with its offbeat humor and playful design. It’s an exploration of what happens when you let go of the usual constraints and have a bit of fun.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Hero Section:** A grand, animated hero section featuring a large, gradient text and a button that opens a modal for more absurdity. The button has an engaging animation, and the scroll indicator provides a calm yet playful hint to continue exploring.
+  
+- **About Section:** This section features a carousel of absurd jokes, each displayed with an animation that makes the transition from one joke to the next a bit more entertaining. There's also a multilingual slider with a rotating list of translations of the phrase "Not funny at all," each moving in a continuous loop.
 
-## Learn More
+- **Modal:** An extra touch of absurdity is added with a modal that appears when you click the button in the hero section, adding to the overall playful experience.
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **React:** A JavaScript library for building user interfaces.
+- **Framer Motion:** A library for animations in React.
+- **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
+- **Next.js:** A React framework for server-side rendering and static site generation.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Note:** This project is intentionally designed to be absurd and humorous. If you encounter bugs or issues, they are part of the experience. Enjoy the absurdity!
