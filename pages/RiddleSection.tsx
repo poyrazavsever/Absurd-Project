@@ -105,139 +105,139 @@ const riddles = [
 ];
 
 const RiddleSection = () => {
-    const [currentRiddle, setCurrentRiddle] = useState<number>(0);
-    const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-    const [feedback, setFeedback] = useState<string | null>(null);
-    const [score, setScore] = useState<number>(0);
-    const [modalOpen, setModalOpen] = useState<boolean>(false);
-    const [modalMessage, setModalMessage] = useState<string>('');
-    const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false);
-    const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [currentRiddle, setCurrentRiddle] = useState<number>(0);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [feedback, setFeedback] = useState<string | null>(null);
+  const [score, setScore] = useState<number>(0);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalMessage, setModalMessage] = useState<string>('');
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
-    const handleAnswerChange = (index: number) => {
-      setSelectedAnswer(index);
-    };
+  const handleAnswerChange = (index: number) => {
+    setSelectedAnswer(index);
+  };
 
-    const handleCheckAnswer = () => {
-      if (selectedAnswer !== null) {
-        const correctAnswer = riddles[currentRiddle].answers.find(answer => answer.correct);
-        if (riddles[currentRiddle].answers[selectedAnswer].correct) {
-          setFeedback('correct');
-          setScore(prevScore => prevScore + 1);
-          setModalMessage("Correct! Aren't you busy? And you're solving this? And you're doing it right. My God...");
-          setIsAnswerCorrect(true);
+  const handleCheckAnswer = () => {
+    if (selectedAnswer !== null) {
+      const correctAnswer = riddles[currentRiddle].answers.find(answer => answer.correct);
+      if (riddles[currentRiddle].answers[selectedAnswer].correct) {
+        setFeedback('correct');
+        setScore(prevScore => prevScore + 1);
+        setModalMessage("Correct! Aren't you busy? And you're solving this? And you're doing it right. My God...");
+        setIsAnswerCorrect(true);
+      } else {
+        setFeedback('incorrect');
+        setModalMessage('Incorrect! The correct answer is: ' + correctAnswer?.text);
+        setIsAnswerCorrect(false);
+      }
+      
+      setModalOpen(true);
+
+      // Automatically go to the next riddle after the modal closes
+      setTimeout(() => {
+        setModalOpen(false);
+        setFeedback(null);
+        setSelectedAnswer(null);
+        setCurrentRiddle((prev) => (prev + 1) % riddles.length);
+      }, 3000); // 3 seconds for the modal to display
+    }
+  };
+
+  const handleNextRiddle = () => {
+    setFeedback(null);
+    setSelectedAnswer(null);
+    setCurrentRiddle((prev) => (prev + 1) % riddles.length);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
         } else {
-          setFeedback('incorrect');
-          setModalMessage('Incorrect! The correct answer is: ' + correctAnswer?.text);
-          setIsAnswerCorrect(false);
+          setIsVisible(false);
         }
-        
-        setModalOpen(true);
-
-        // Automatically go to the next riddle after the modal closes
-        setTimeout(() => {
-          setModalOpen(false);
-          setFeedback(null);
-          setSelectedAnswer(null);
-          setCurrentRiddle((prev) => (prev + 1) % riddles.length);
-        }, 3000); // 3 seconds for the modal to display
-      }
-    };
-
-    const handleNextRiddle = () => {
-      setFeedback(null);
-      setSelectedAnswer(null);
-      setCurrentRiddle((prev) => (prev + 1) % riddles.length);
-    };
-
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          } else {
-            setIsVisible(false);
-          }
-        },
-        { threshold: 0.1 } // Valid threshold value between 0 and 1
-      );
-
-      const sectionElement = document.querySelector('#riddle-section');
-      if (sectionElement) {
-        observer.observe(sectionElement);
-      }
-
-      return () => {
-        if (sectionElement) {
-          observer.unobserve(sectionElement);
-        }
-      };
-    }, []);
-
-    return (
-      <div id="riddle-section" className="h-full w-full bg-neutral-950 flex flex-col items-center justify-center text-3xl relative">
-        <ModalRiddle 
-          isOpen={modalOpen} 
-          onClose={() => setModalOpen(false)} 
-          message={modalMessage} 
-          isCorrect={isAnswerCorrect} 
-        />
-        <h2 className="text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-sky-100 mb-8">Riddle Me This!</h2>
-        <motion.div
-          className="p-8 bg-neutral-900 border border-neutral-800 rounded-lg shadow-lg text-center"
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
-          animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8, y: isVisible ? 0 : 20 }}
-          transition={{ duration: 0.6, ease: 'easeInOut' }}
-        >
-          <p className="text-2xl font-medium text-neutral-300 pb-8">{riddles[currentRiddle].question}</p>
-          <div className="flex flex-col space-y-4">
-            {riddles[currentRiddle].answers.map((answer, index) => (
-              <label 
-                key={index} 
-                className={`block p-4 rounded-lg cursor-pointer text-neutral-300 transition-colors ${selectedAnswer === index ? (feedback === 'correct' ? 'bg-green-500' : 'bg-red-500') : 'bg-neutral-800 hover:bg-neutral-700'} ${feedback ? 'pointer-events-none' : ''}`}
-              >
-                <input
-                  type="radio"
-                  name="answer"
-                  value={index}
-                  className="hidden"
-                  checked={selectedAnswer === index}
-                  onChange={() => handleAnswerChange(index)}
-                />
-                {answer.text}
-              </label>
-            ))}
-          </div>
-          <div className='flex items-center justify-start gap-8 pt-6'>
-            <motion.button
-              onClick={handleCheckAnswer}
-              className="px-6 py-3 text-lg font-bold text-white bg-blue-950 rounded hover:bg-blue-800 transition-all duration-300"
-              whileHover={{ scale: 1.1, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Check Answer
-            </motion.button>
-            <motion.button
-              onClick={handleNextRiddle}
-              className="px-6 py-3 text-lg font-bold text-white bg-purple-950 rounded hover:bg-purple-800 transition-all duration-300"
-              whileHover={{ scale: 1.1, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Next Riddle
-            </motion.button>
-          </div>
-        </motion.div>
-        {/* Score Display */}
-        <motion.div
-          className="absolute top-4 right-4 text-lg font-bold text-gray-200 bg-neutral-800 bg-opacity-50 border border-neutral-700 p-4 rounded-lg shadow-lg"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : -20 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-        >
-          <p>Score: {score}</p>
-        </motion.div>
-      </div>
+      },
+      { threshold: 0.1 } // Valid threshold value between 0 and 1
     );
+
+    const sectionElement = document.querySelector('#riddle-section');
+    if (sectionElement) {
+      observer.observe(sectionElement);
+    }
+
+    return () => {
+      if (sectionElement) {
+        observer.unobserve(sectionElement);
+      }
+    };
+  }, []);
+
+  return (
+    <div id="riddle-section" className="h-full w-full bg-neutral-950 flex flex-col items-center justify-center text-3xl relative px-4 sm:px-6 md:px-8 lg:px-12">
+      <ModalRiddle 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)} 
+        message={modalMessage} 
+        isCorrect={isAnswerCorrect} 
+      />
+      <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-sky-100 mb-8 text-center">Riddle Me This!</h2>
+      <motion.div
+        className="p-6 md:p-8 lg:p-10 bg-neutral-900 border border-neutral-800 rounded-lg shadow-lg text-center w-full max-w-2xl"
+        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+        animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8, y: isVisible ? 0 : 20 }}
+        transition={{ duration: 0.6, ease: 'easeInOut' }}
+      >
+        <p className="text-lg md:text-xl lg:text-2xl font-medium text-neutral-300 pb-6">{riddles[currentRiddle].question}</p>
+        <div className="flex flex-col space-y-4">
+          {riddles[currentRiddle].answers.map((answer, index) => (
+            <label 
+              key={index} 
+              className={`block p-4 rounded-lg cursor-pointer text-neutral-300 transition-colors ${selectedAnswer === index ? (feedback === 'correct' ? 'bg-green-500' : 'bg-red-500') : 'bg-neutral-800 hover:bg-neutral-700'} ${feedback ? 'pointer-events-none' : ''}`}
+            >
+              <input
+                type="radio"
+                name="answer"
+                value={index}
+                className="hidden"
+                checked={selectedAnswer === index}
+                onChange={() => handleAnswerChange(index)}
+              />
+              {answer.text}
+            </label>
+          ))}
+        </div>
+        <div className='flex flex-col sm:flex-row items-center justify-center gap-4 pt-6'>
+          <motion.button
+            onClick={handleCheckAnswer}
+            className="px-6 py-3 text-lg font-bold text-white bg-blue-950 rounded hover:bg-blue-800 transition-all duration-300"
+            whileHover={{ scale: 1.1, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)' }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Check Answer
+          </motion.button>
+          <motion.button
+            onClick={handleNextRiddle}
+            className="px-6 py-3 text-lg font-bold text-white bg-purple-950 rounded hover:bg-purple-800 transition-all duration-300"
+            whileHover={{ scale: 1.1, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)' }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Next Riddle
+          </motion.button>
+        </div>
+      </motion.div>
+      {/* Score Display */}
+      <motion.div
+        className="absolute top-4 right-4 text-sm md:text-lg font-bold text-gray-200 bg-neutral-800 bg-opacity-50 border border-neutral-700 p-3 md:p-4 rounded-lg shadow-lg"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : -20 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
+        <p>Score: {score}</p>
+      </motion.div>
+    </div>
+  );
 };
 
 export default RiddleSection;
