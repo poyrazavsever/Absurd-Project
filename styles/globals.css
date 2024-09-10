@@ -21,14 +21,22 @@ html, body {
 
 .custom-cursor {
   @apply absolute w-24 h-24 rounded-full border-2 border-opacity-50 border-white pointer-events-none transform -translate-x-1/2 -translate-y-1/2;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
+  z-index: 1000; /* Cursor'un ön planda olması için yüksek z-index */
+}
+
+.custom-cursor::before {
+  content: '';
+  @apply absolute w-24 h-24 rounded-full bg-violet-500;
+  filter: blur(12px);
+  opacity: 0.5;
+  z-index: -1; /* Cursor'un arkasında kalması için */
 }
 
 .custom-cursor::after {
   content: '';
   @apply w-2.5 h-2.5 rounded-full bg-white;
+  z-index: 1; /* Cursor'un ön kısmında olması için */
 }
