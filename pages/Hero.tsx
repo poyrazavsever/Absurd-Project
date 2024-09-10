@@ -28,7 +28,7 @@ function Hero() {
           Did you see this too?
         </h5>
         <p className='text-3xl md:text-5xl text-neutral-200 font-semibold'>
-          No, I didn't see anything either, it's just bullshit. I don't know why I did it. But it was fun.
+          No, I didn&apos;t see anything either, it&apos;s just bullshit. I don&apos;t know why I did it. But it was fun.
         </p>
         {/* Animasyonlu Buton */}
         <motion.button
