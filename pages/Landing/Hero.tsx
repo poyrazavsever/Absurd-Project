@@ -24,7 +24,7 @@ function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
       >
-        <h5 className='text-5xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-sky-500'>
+        <h5 className='text-5xl md:text-[150px] font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-sky-200'>
           Did you see this too?
         </h5>
         <p className='text-3xl md:text-5xl text-neutral-200 font-semibold'>
@@ -32,11 +32,11 @@ function Hero() {
         </p>
         {/* Animasyonlu Buton */}
         <motion.button
-          whileHover={{ scale: 1.1, backgroundColor: '#A78BFA' }} // Hover animasyonu
+          whileHover={{ scale: 1.1, backgroundColor: '#636363' }} // Hover animasyonu
           whileTap={{ scale: 0.9 }} // Tıklama animasyonu
           transition={{ type: 'spring', stiffness: 300 }} // Geçiş ayarları
           onClick={handleButtonClick}
-          className='px-6 py-3 text-lg font-bold text-white rounded-full bg-violet-600 border-2 border-transparent hover:border-violet-400 transition-colors cursor-none'
+          className='px-6 py-3 text-lg font-bold text-white rounded-full bg-neutral-900 bg-opacity-50 border-2 border-transparent hover:border-neutral-400 transition-colors cursor-none'
         >
           Explore More
         </motion.button>
