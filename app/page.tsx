@@ -37,6 +37,23 @@ const Page = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    document.body.appendChild(cursor);
+
+    const handleMouseMove = (event: MouseEvent) => {
+      cursor.style.left = `${event.clientX}px`;
+      cursor.style.top = `${event.clientY}px`;
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.body.removeChild(cursor);
+    };
+  }, []);
   return (
     <div className="relative overflow-hidden h-screen w-screen">
       <div className="section h-screen w-screen active">
