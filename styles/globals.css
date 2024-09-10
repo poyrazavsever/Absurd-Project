@@ -41,3 +41,21 @@ html, body {
   font-size: 1.5rem;
   z-index: 1;
 }
+
+/* Başlık ve paragraf seçim renkleri */
+::selection {
+  background-color: #fbcfe8; /* Açık pembe arka plan rengi */
+  color: #6b21a8; /* Mor yazı rengi */
+}
+
+/* Başlık ve paragraf seçildiğinde özel renk */
+h5::selection {
+  background-color: #fbcfe8; /* Açık pembe arka plan rengi */
+  color: #6b21a8; /* Mor yazı rengi */
+}
+
+p::selection {
+  background-color: #e9d5ff; /* Mor arka plan rengi */
+  color: #4a00e0; /* Mor yazı rengi */
+}
+
